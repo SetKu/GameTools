@@ -1,5 +1,5 @@
 //
-//  GTEngine.swift
+//  Engine.swift
 //  Game Tools
 //
 //  Created by Zachary Morden on 2022-08-07.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-protocol GTEngine {
+protocol Engine {
     /// - Parameter number: The number of dice to roll.
     /// - Returns: An array of integers with the number specified between 0 and 7 (1, 2, 3, 4, 5, 6).
     static func rollDice(_ number: Int) -> [Int]
 }
 
-extension GTEngine {
+extension Engine {
     static func rollDice(_ number: Int) -> [Int] {
         var arr = [Int]()
         

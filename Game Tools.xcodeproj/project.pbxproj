@@ -14,11 +14,12 @@
 		2477143F28A0969100B8AE5C /* Game_ToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477143E28A0969100B8AE5C /* Game_ToolsTests.swift */; };
 		2477144928A0969100B8AE5C /* Game_ToolsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477144828A0969100B8AE5C /* Game_ToolsUITests.swift */; };
 		2477144B28A0969100B8AE5C /* Game_ToolsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477144A28A0969100B8AE5C /* Game_ToolsUITestsLaunchTests.swift */; };
-		2477145828A096BD00B8AE5C /* GTEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477145728A096BD00B8AE5C /* GTEngine.swift */; };
-		2477145A28A0A6B300B8AE5C /* RiskToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477145928A0A6B300B8AE5C /* RiskToolsView.swift */; };
-		2477145C28A0D62500B8AE5C /* GTRiskEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477145B28A0D62500B8AE5C /* GTRiskEngine.swift */; };
+		2477145828A096BD00B8AE5C /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477145728A096BD00B8AE5C /* Engine.swift */; };
+		2477145A28A0A6B300B8AE5C /* RiskAttackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477145928A0A6B300B8AE5C /* RiskAttackView.swift */; };
+		2477145C28A0D62500B8AE5C /* RiskEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477145B28A0D62500B8AE5C /* RiskEngine.swift */; };
 		2477145E28A0DAA500B8AE5C /* RiskRollsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477145D28A0DAA500B8AE5C /* RiskRollsView.swift */; };
 		2477146028A0DD0800B8AE5C /* FormattedRiskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477145F28A0DD0800B8AE5C /* FormattedRiskResponse.swift */; };
+		24BEEB0728A20B2A003C409C /* FormattedRiskAverage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEEB0628A20B2A003C409C /* FormattedRiskAverage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,11 +51,12 @@
 		2477144428A0969100B8AE5C /* Game ToolsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Game ToolsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2477144828A0969100B8AE5C /* Game_ToolsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game_ToolsUITests.swift; sourceTree = "<group>"; };
 		2477144A28A0969100B8AE5C /* Game_ToolsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game_ToolsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		2477145728A096BD00B8AE5C /* GTEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GTEngine.swift; sourceTree = "<group>"; };
-		2477145928A0A6B300B8AE5C /* RiskToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskToolsView.swift; sourceTree = "<group>"; };
-		2477145B28A0D62500B8AE5C /* GTRiskEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GTRiskEngine.swift; sourceTree = "<group>"; };
+		2477145728A096BD00B8AE5C /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		2477145928A0A6B300B8AE5C /* RiskAttackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskAttackView.swift; sourceTree = "<group>"; };
+		2477145B28A0D62500B8AE5C /* RiskEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskEngine.swift; sourceTree = "<group>"; };
 		2477145D28A0DAA500B8AE5C /* RiskRollsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskRollsView.swift; sourceTree = "<group>"; };
 		2477145F28A0DD0800B8AE5C /* FormattedRiskResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedRiskResponse.swift; sourceTree = "<group>"; };
+		24BEEB0628A20B2A003C409C /* FormattedRiskAverage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedRiskAverage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +87,6 @@
 		2477142028A0969000B8AE5C = {
 			isa = PBXGroup;
 			children = (
-				2477145F28A0DD0800B8AE5C /* FormattedRiskResponse.swift */,
 				2477142B28A0969000B8AE5C /* Game Tools */,
 				2477143D28A0969100B8AE5C /* Game ToolsTests */,
 				2477144728A0969100B8AE5C /* Game ToolsUITests */,
@@ -108,10 +109,12 @@
 			children = (
 				2477145D28A0DAA500B8AE5C /* RiskRollsView.swift */,
 				2477142C28A0969000B8AE5C /* Game_ToolsApp.swift */,
+				24BEEB0628A20B2A003C409C /* FormattedRiskAverage.swift */,
+				2477145F28A0DD0800B8AE5C /* FormattedRiskResponse.swift */,
 				2477142E28A0969000B8AE5C /* ContentView.swift */,
-				2477145928A0A6B300B8AE5C /* RiskToolsView.swift */,
-				2477145728A096BD00B8AE5C /* GTEngine.swift */,
-				2477145B28A0D62500B8AE5C /* GTRiskEngine.swift */,
+				2477145928A0A6B300B8AE5C /* RiskAttackView.swift */,
+				2477145728A096BD00B8AE5C /* Engine.swift */,
+				2477145B28A0D62500B8AE5C /* RiskEngine.swift */,
 				2477143028A0969100B8AE5C /* Assets.xcassets */,
 				2477143228A0969100B8AE5C /* Game_Tools.entitlements */,
 				2477143328A0969100B8AE5C /* Preview Content */,
@@ -274,13 +277,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2477145A28A0A6B300B8AE5C /* RiskToolsView.swift in Sources */,
+				2477145A28A0A6B300B8AE5C /* RiskAttackView.swift in Sources */,
 				2477142F28A0969000B8AE5C /* ContentView.swift in Sources */,
-				2477145828A096BD00B8AE5C /* GTEngine.swift in Sources */,
+				2477145828A096BD00B8AE5C /* Engine.swift in Sources */,
 				2477145E28A0DAA500B8AE5C /* RiskRollsView.swift in Sources */,
 				2477142D28A0969000B8AE5C /* Game_ToolsApp.swift in Sources */,
-				2477145C28A0D62500B8AE5C /* GTRiskEngine.swift in Sources */,
+				2477145C28A0D62500B8AE5C /* RiskEngine.swift in Sources */,
 				2477146028A0DD0800B8AE5C /* FormattedRiskResponse.swift in Sources */,
+				24BEEB0728A20B2A003C409C /* FormattedRiskAverage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,7 +439,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Game Tools/Preview Content\"";
-				DEVELOPMENT_TEAM = N5X3KC9PBF;
+				DEVELOPMENT_TEAM = KK95T5RM2S;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -455,7 +459,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.setku.gametools;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.morden.gametools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -474,7 +478,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Game Tools/Preview Content\"";
-				DEVELOPMENT_TEAM = N5X3KC9PBF;
+				DEVELOPMENT_TEAM = KK95T5RM2S;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -494,7 +498,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.setku.gametools;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.morden.gametools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";

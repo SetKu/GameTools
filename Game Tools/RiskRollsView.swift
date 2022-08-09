@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RiskRollsView: View {
-    let roll: GTRiskEngine.Roll
+    let roll: RiskEngine.Roll
     private static let diceSize: CGFloat = 60
     
     var body: some View {

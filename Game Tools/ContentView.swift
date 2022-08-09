@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     enum Sections: String, Identifiable, CaseIterable {
-        case risk = "Risk Tools"
+        case riskAttack = "Risk Attack Automation"
         
         var id: Int { self.hashValue }
     }
     
-    @State private var selectedSection = Sections.risk
+    @State private var selectedSection = Sections.riskAttack
     
     var body: some View {
         #if os(macOS)
@@ -24,8 +24,8 @@ struct ContentView: View {
             }
         }, detail: {
             switch selectedSection {
-            case .risk:
-                RiskTools()
+            case .riskAttack:
+                RiskAttackView()
             }
         })
         .frame(minWidth: 200, minHeight: 100)
@@ -36,11 +36,12 @@ struct ContentView: View {
             }
             .navigationDestination(for: Sections.self, destination: {
                 switch $0 {
-                case .risk:
-                    RiskToolsView()
+                case .riskAttack:
+                    RiskAttackView()
                 }
             })
             .navigationTitle("Game Tools")
+            .navigationBarTitleDisplayMode(.large)
         }
         #endif
     }

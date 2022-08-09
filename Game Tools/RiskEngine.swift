@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GTRiskEngine: GTEngine {
+struct RiskEngine: Engine {
     private init() { }
     
     struct Roll: Identifiable, Equatable {
@@ -16,7 +16,7 @@ struct GTRiskEngine: GTEngine {
         let id = UUID()
     }
     
-    struct AttackResponse {
+    struct AttackResponse: Equatable {
         let rolls: [Roll]
         let defence: Int
         let attack: Int
@@ -112,6 +112,17 @@ struct GTRiskEngine: GTEngine {
         return response
     }
     
+    static func averageAttack(sampleSize: Int, simConfig: AttackConfiguration) throws -> AttackAverage {
+        var responses = [AttackResponse]()
+        
+        for _ in 0 ..< sampleSize {
+            responses.append(try simulateAttack(config: simConfig))
+        }
+        
+        let average = averageOutcome(fromAttacks: responses)
+        return average
+    }
+    
     static func simulateAttackSeries(
         _ maximumIterations: Int,
         withConfig config: AttackConfiguration,
@@ -146,11 +157,54 @@ struct GTRiskEngine: GTEngine {
         return response
     }
     
-//    static func averageAttacks(responses: [AttackResponse]) -> AttackResponse {
-//
-//    }
-//
-//    static func findBestAttack() -> SomeValue {
-//
-//    }
+    struct AttackSeriesConfiguration {
+        let maximumIterations: Int
+        let simConfig: AttackConfiguration
+        let minimumAttackReserve: Int?
+        
+        init(maximumIterations: Int, simConfig: AttackConfiguration, minimumAttackReserve: Int? = nil) {
+            self.maximumIterations = maximumIterations
+            self.simConfig = simConfig
+            self.minimumAttackReserve = minimumAttackReserve
+        }
+    }
+    
+    static func averageAttackSeries(sampleSize: Int, simSeriesConfig: AttackSeriesConfiguration) throws -> AttackAverage {
+        var responses = [AttackResponse]()
+        
+        for _ in 0 ..< sampleSize {
+            responses.append(try simulateAttackSeries(simSeriesConfig.maximumIterations, withConfig: simSeriesConfig.simConfig, minimumAttackReserve: simSeriesConfig.minimumAttackReserve))
+        }
+        
+        let average = averageOutcome(fromAttacks: responses)
+        return average
+    }
+    
+    struct AttackAverage: Equatable {
+        let defence: Int
+        let attack: Int
+        let attackerLost: Bool
+        let defenderLost: Bool
+        let initialDefence: Int
+        let initialAttack: Int
+    }
+
+    static func averageOutcome(fromAttacks attacks: [AttackResponse]) -> AttackAverage {
+        let defenceAverage = attacks.map(\.defence).reduce(into: 0, { $0 += $1 }) / attacks.map(\.defence).count
+        let attackAverage = attacks.map(\.attack).reduce(into: 0, { $0 += $1 }) / attacks.map(\.attack).count
+        
+        let initialAttack = attacks.first?.initialAttack ?? 2
+        let initialDefence = attacks.first?.initialDefence ?? 1
+        
+        let response = AttackAverage(
+            defence: defenceAverage,
+            attack: attackAverage,
+            attackerLost: attackAverage < initialAttack,
+            defenderLost: defenceAverage < initialDefence,
+            initialDefence: initialAttack,
+            initialAttack: initialDefence
+        )
+        
+        return response
+    }
 }
