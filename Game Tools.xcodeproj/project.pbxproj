@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2437C6F628A33073004FEBFF /* RiskSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2437C6F528A33073004FEBFF /* RiskSimulator.swift */; };
+		2459FB0C28A33AF500DB01CA /* UIImage+findAverageColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2459FB0B28A33AF500DB01CA /* UIImage+findAverageColor.swift */; };
+		2459FB0E28A346C900DB01CA /* RiskAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2459FB0D28A346C900DB01CA /* RiskAI.swift */; };
+		2459FB1028A34AC100DB01CA /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2459FB0F28A34AC100DB01CA /* ImagePicker.swift */; };
+		2470082328A319B400E842A0 /* RiskCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470082228A319B400E842A0 /* RiskCounter.swift */; };
 		2477142D28A0969000B8AE5C /* Game_ToolsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477142C28A0969000B8AE5C /* Game_ToolsApp.swift */; };
 		2477142F28A0969000B8AE5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477142E28A0969000B8AE5C /* ContentView.swift */; };
 		2477143128A0969100B8AE5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2477143028A0969100B8AE5C /* Assets.xcassets */; };
@@ -40,6 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2437C6F528A33073004FEBFF /* RiskSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskSimulator.swift; sourceTree = "<group>"; };
+		2459FB0B28A33AF500DB01CA /* UIImage+findAverageColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+findAverageColor.swift"; sourceTree = "<group>"; };
+		2459FB0D28A346C900DB01CA /* RiskAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskAI.swift; sourceTree = "<group>"; };
+		2459FB0F28A34AC100DB01CA /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		2470082228A319B400E842A0 /* RiskCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskCounter.swift; sourceTree = "<group>"; };
 		2477142928A0969000B8AE5C /* Game Tools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Game Tools.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2477142C28A0969000B8AE5C /* Game_ToolsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game_ToolsApp.swift; sourceTree = "<group>"; };
 		2477142E28A0969000B8AE5C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,14 +117,19 @@
 		2477142B28A0969000B8AE5C /* Game Tools */ = {
 			isa = PBXGroup;
 			children = (
-				2477145D28A0DAA500B8AE5C /* RiskRollsView.swift */,
 				2477142C28A0969000B8AE5C /* Game_ToolsApp.swift */,
-				24BEEB0628A20B2A003C409C /* FormattedRiskAverage.swift */,
-				2477145F28A0DD0800B8AE5C /* FormattedRiskResponse.swift */,
 				2477142E28A0969000B8AE5C /* ContentView.swift */,
-				2477145928A0A6B300B8AE5C /* RiskAttackView.swift */,
 				2477145728A096BD00B8AE5C /* Engine.swift */,
 				2477145B28A0D62500B8AE5C /* RiskEngine.swift */,
+				2477145928A0A6B300B8AE5C /* RiskAttackView.swift */,
+				2477145D28A0DAA500B8AE5C /* RiskRollsView.swift */,
+				24BEEB0628A20B2A003C409C /* FormattedRiskAverage.swift */,
+				2477145F28A0DD0800B8AE5C /* FormattedRiskResponse.swift */,
+				2470082228A319B400E842A0 /* RiskCounter.swift */,
+				2459FB0F28A34AC100DB01CA /* ImagePicker.swift */,
+				2437C6F528A33073004FEBFF /* RiskSimulator.swift */,
+				2459FB0D28A346C900DB01CA /* RiskAI.swift */,
+				2459FB0B28A33AF500DB01CA /* UIImage+findAverageColor.swift */,
 				2477143028A0969100B8AE5C /* Assets.xcassets */,
 				2477143228A0969100B8AE5C /* Game_Tools.entitlements */,
 				2477143328A0969100B8AE5C /* Preview Content */,
@@ -163,6 +178,8 @@
 			dependencies = (
 			);
 			name = "Game Tools";
+			packageProductDependencies = (
+			);
 			productName = "Game Tools";
 			productReference = 2477142928A0969000B8AE5C /* Game Tools.app */;
 			productType = "com.apple.product-type.application";
@@ -235,6 +252,8 @@
 				Base,
 			);
 			mainGroup = 2477142028A0969000B8AE5C;
+			packageReferences = (
+			);
 			productRefGroup = 2477142A28A0969000B8AE5C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -277,14 +296,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2459FB1028A34AC100DB01CA /* ImagePicker.swift in Sources */,
 				2477145A28A0A6B300B8AE5C /* RiskAttackView.swift in Sources */,
 				2477142F28A0969000B8AE5C /* ContentView.swift in Sources */,
 				2477145828A096BD00B8AE5C /* Engine.swift in Sources */,
 				2477145E28A0DAA500B8AE5C /* RiskRollsView.swift in Sources */,
+				2470082328A319B400E842A0 /* RiskCounter.swift in Sources */,
 				2477142D28A0969000B8AE5C /* Game_ToolsApp.swift in Sources */,
 				2477145C28A0D62500B8AE5C /* RiskEngine.swift in Sources */,
+				2437C6F628A33073004FEBFF /* RiskSimulator.swift in Sources */,
 				2477146028A0DD0800B8AE5C /* FormattedRiskResponse.swift in Sources */,
 				24BEEB0728A20B2A003C409C /* FormattedRiskAverage.swift in Sources */,
+				2459FB0E28A346C900DB01CA /* RiskAI.swift in Sources */,
+				2459FB0C28A33AF500DB01CA /* UIImage+findAverageColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +468,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We would like to use your camera for image analysis.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We would like to use your photos for image analysis.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -483,6 +509,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We would like to use your camera for image analysis.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We would like to use your photos for image analysis.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

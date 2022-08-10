@@ -10,8 +10,20 @@ import SwiftUI
 struct ContentView: View {
     enum Sections: String, Identifiable, CaseIterable {
         case riskAttack = "Risk Attack Automation"
+        case riskCounter = "Risk Piece Counter"
+        case riskAI = "Risk Artificial Intelligence"
         
         var id: Int { self.hashValue }
+        var image: String {
+            switch self {
+            case .riskAttack:
+                return "die.face.5.fill"
+            case .riskCounter:
+                return "camera.viewfinder"
+            case .riskAI:
+                return "globe.americas.fill"
+            }
+        }
     }
     
     @State private var selectedSection = Sections.riskAttack
@@ -20,24 +32,41 @@ struct ContentView: View {
         #if os(macOS)
         NavigationSplitView(sidebar: {
             List(Sections.allCases, selection: $selectedSection) { section in
-                Text(section.rawValue).tag(section)
+                HStack {
+                    Image(systemName: section.image)
+                    Text(section.rawValue)
+                }
+                .tag(section)
             }
         }, detail: {
             switch selectedSection {
             case .riskAttack:
                 RiskAttackView()
+            case .riskCounter:
+                RiskCounter()
+            case .riskAI:
+                RiskAI()
             }
         })
         .frame(minWidth: 200, minHeight: 100)
         #else
         NavigationStack {
             List(Sections.allCases) { section in
-                NavigationLink(section.rawValue, value: section)
+                NavigationLink(value: section) {
+                    HStack {
+                        Image(systemName: section.image)
+                        Text(section.rawValue)
+                    }
+                }
             }
             .navigationDestination(for: Sections.self, destination: {
                 switch $0 {
                 case .riskAttack:
                     RiskAttackView()
+                case .riskCounter:
+                    RiskCounter()
+                case .riskAI:
+                    RiskAI()
                 }
             })
             .navigationTitle("Game Tools")

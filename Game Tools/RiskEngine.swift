@@ -6,9 +6,47 @@
 //
 
 import Foundation
+import CoreGraphics
+import Vision
+import UIKit
 
 struct RiskEngine: Engine {
     private init() { }
+    
+    // MARK: - Object Counter
+    
+    struct Counter {
+        enum CounterErrors: String, CustomStringConvertible, Error {
+            var description: String { self.rawValue }
+            case noCGImage = "The UIImage had to CGImage to work with."
+        }
+        
+        static func detectObjects(image: UIImage) throws -> [VNRectangleObservation] {
+            guard let image = image.cgImage else { throw CounterErrors.noCGImage }
+            let handler = VNImageRequestHandler(cgImage: image, orientation: .up, options: [:])
+            
+            var results = [VNRectangleObservation]()
+            let request = VNDetectRectanglesRequest { request, error in
+                if request.results != nil {
+                    results.append(contentsOf: request.results! as! [VNRectangleObservation])
+                }
+            }
+            
+            // Customize & configure the request to detect only certain rectangles.
+            request.maximumObservations = 0
+            request.minimumConfidence = 0.6 // Be confident.
+            request.minimumAspectRatio = 0.7 // height / width
+            
+            #if targetEnvironment(simulator)
+            request.usesCPUOnly = true
+            #endif
+            
+            try handler.perform([request])
+            return results
+        }
+    }
+    
+    // MARK: - Attack Simulators
     
     struct Roll: Identifiable, Equatable {
         let attack: [Int]

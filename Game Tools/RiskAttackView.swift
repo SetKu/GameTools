@@ -80,7 +80,7 @@ struct RiskAttackView: View {
                     Text("Attack:")
                     Text("\(Int(attack))")
                         .frame(width: valueWidth)
-                    Slider(value: $attack, in: 2...90, step: 1)
+                    Slider(value: $attack, in: 2...120, step: 1)
                 }
                 
                 GridRow {
@@ -88,7 +88,7 @@ struct RiskAttackView: View {
                     Text("Defence:")
                     Text("\(Int(defence))")
                         .frame(width: valueWidth)
-                    Slider(value: $defence, in: 1...90, step: 1)
+                    Slider(value: $defence, in: 1...120, step: 1)
                 }
                 
                 GridRow {
@@ -119,7 +119,7 @@ struct RiskAttackView: View {
                         Text("Maximum Iterations:")
                         Text("\(Int(series))")
                             .frame(width: valueWidth)
-                        Slider(value: $series, in: 1...100, step: 1)
+                        Slider(value: $series, in: 1...500, step: 1)
                     }
                     
                     HStack {
@@ -127,7 +127,7 @@ struct RiskAttackView: View {
                         Text("Minimum Attack Reserve:")
                         Text("\(Int(minimumAttackReserve))")
                             .frame(width: valueWidth)
-                        Slider(value: $minimumAttackReserve, in: 1...90, step: 1)
+                        Slider(value: $minimumAttackReserve, in: 1...120, step: 1)
                     }
                     
                     if attack < minimumAttackReserve + power {
@@ -148,7 +148,7 @@ struct RiskAttackView: View {
                 .frame(height: 30)
                 .frame(maxWidth: .infinity)
                 .padding(10)
-                .background(Color.blue.cornerRadius(12).shadow(radius: 5))
+                .background(Color.blue.cornerRadius(12).shadow(radius: 3))
                 .frame(width: 150)
                 .shadow(radius: 5)
                 .opacity(configuration.isPressed ? 0.5 : 1)
