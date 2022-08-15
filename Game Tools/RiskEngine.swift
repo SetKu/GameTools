@@ -8,42 +8,104 @@
 import Foundation
 import CoreGraphics
 import Vision
+
+#if !os(macOS)
 import UIKit
+#endif
 
 struct RiskEngine: Engine {
     private init() { }
     
     // MARK: - Object Counter
     
-    struct Counter {
-        enum CounterErrors: String, CustomStringConvertible, Error {
-            var description: String { self.rawValue }
-            case noCGImage = "The UIImage had to CGImage to work with."
+    final class Counter: ObservableObject {
+        enum Model: String, CaseIterable {
+            case v2 = "V2"
+            case v3 = "V3"
+            
+            static let modelV2 = (try! RiskPieceDetectorV2(configuration: .init())).model
+            static let modelV3 = (try! RiskPieceDetectorV3(configuration: .init())).model
+            
+            var mlModel: MLModel {
+                switch self {
+                case .v2:
+                    return Self.modelV2
+                case .v3:
+                    return Self.modelV3
+                }
+            }
         }
         
-        static func detectObjects(image: UIImage) throws -> [VNRectangleObservation] {
-            guard let image = image.cgImage else { throw CounterErrors.noCGImage }
-            let handler = VNImageRequestHandler(cgImage: image, orientation: .up, options: [:])
+        @Published var currentModel: Model
+        private var visionModel: VNCoreMLModel { try! VNCoreMLModel(for: currentModel.mlModel) }
+        
+        init() { self.currentModel = .v2 }
+        
+        func detectObjects(image: CGImage) throws -> [VNRecognizedObjectObservation] {
+            var returnVal = [VNRecognizedObjectObservation]()
             
-            var results = [VNRectangleObservation]()
-            let request = VNDetectRectanglesRequest { request, error in
-                if request.results != nil {
-                    results.append(contentsOf: request.results! as! [VNRectangleObservation])
+            let request = VNCoreMLRequest(model: visionModel) { request, error in
+                if let results = request.results as? [VNRecognizedObjectObservation] {
+                    returnVal = results
                 }
             }
             
-            // Customize & configure the request to detect only certain rectangles.
-            request.maximumObservations = 0
-            request.minimumConfidence = 0.6 // Be confident.
-            request.minimumAspectRatio = 0.7 // height / width
-            
             #if targetEnvironment(simulator)
-            request.usesCPUOnly = true
+            request.usesCPUOnly
+            #endif
+            
+            #if os(macOS)
+            let handler = VNImageRequestHandler(cgImage: image)
+            #else
+            let orientation: CGImagePropertyOrientation
+            
+            switch UIDevice.current.orientation {
+            case .portraitUpsideDown:
+                orientation = .down
+                break
+            case .landscapeLeft:
+                orientation = .left
+                break
+            case .landscapeRight:
+                orientation = .right
+                break
+            default:
+                orientation = .up
+            }
+            
+            let handler = VNImageRequestHandler(cgImage: image, orientation: orientation, options: [:])
             #endif
             
             try handler.perform([request])
-            return results
+            
+            return returnVal
         }
+        
+        // MARK: Old Rectangle Detection
+        
+//        static func detectObjects(image: CGImage) throws -> [VNRectangleObservation] {
+//            let handler = VNImageRequestHandler(cgImage: image, orientation: .up, options: [:])
+//
+//            var results = [VNRectangleObservation]()
+//            let request = VNDetectRectanglesRequest { request, error in
+//                if request.results != nil {
+//                    results.append(contentsOf: request.results! as! [VNRectangleObservation])
+//                }
+//            }
+//
+//            // Customize & configure the request to detect only certain rectangles.
+//            request.maximumObservations = 0
+//            request.minimumConfidence = 0.8 // Be confident.
+//            request.minimumAspectRatio = 0.2 // height / width
+//            request.minimumSize = 0.05
+//
+//            #if targetEnvironment(simulator)
+//            request.usesCPUOnly = true
+//            #endif
+//
+//            try handler.perform([request])
+//            return results
+//        }
     }
     
     // MARK: - Attack Simulators
@@ -54,7 +116,7 @@ struct RiskEngine: Engine {
         let id = UUID()
     }
     
-    struct AttackResponse: Equatable {
+    struct AttackResponse: Equatable, Identifiable {
         let rolls: [Roll]
         let defence: Int
         let attack: Int
@@ -62,6 +124,7 @@ struct RiskEngine: Engine {
         let defenderLost: Bool
         let initialDefence: Int
         let initialAttack: Int
+        let id = UUID()
     }
     
     enum AttackErrors: String, Error {
@@ -161,17 +224,18 @@ struct RiskEngine: Engine {
         return average
     }
     
+    /// Simulates a series of attacks and returns a response with the outcome of making all those attacks.
     static func simulateAttackSeries(
         _ maximumIterations: Int,
         withConfig config: AttackConfiguration,
-        minimumAttackReserve: Int? = nil
+        minimumAttackReserve: Int?
     ) throws -> AttackResponse {
         var defence = config.defence
         var attack = config.attack
         var rolls = [Roll]()
         
         for _ in 0 ..< maximumIterations {
-            if attack - config.power < minimumAttackReserve ?? 1 { break }
+            if attack - config.power <= minimumAttackReserve ?? 1 { break }
             if defence < 1 || attack < 2 { break }
             
             let config = AttackConfiguration(defence: defence, attack: attack, power: config.power)
@@ -211,7 +275,13 @@ struct RiskEngine: Engine {
         var responses = [AttackResponse]()
         
         for _ in 0 ..< sampleSize {
-            responses.append(try simulateAttackSeries(simSeriesConfig.maximumIterations, withConfig: simSeriesConfig.simConfig, minimumAttackReserve: simSeriesConfig.minimumAttackReserve))
+            responses.append(
+                try simulateAttackSeries(
+                    simSeriesConfig.maximumIterations,
+                    withConfig: simSeriesConfig.simConfig,
+                    minimumAttackReserve: simSeriesConfig.minimumAttackReserve
+                )
+            )
         }
         
         let average = averageOutcome(fromAttacks: responses)
@@ -225,6 +295,35 @@ struct RiskEngine: Engine {
         let defenderLost: Bool
         let initialDefence: Int
         let initialAttack: Int
+        let attacks: [AttackResponse]
+        
+        init(defence: Int, attack: Int, attackerLost: Bool, defenderLost: Bool, initialDefence: Int, initialAttack: Int, attacks: [AttackResponse]) {
+            self.defence = defence
+            self.attack = attack
+            self.attackerLost = attackerLost
+            self.defenderLost = defenderLost
+            self.initialDefence = initialDefence
+            self.initialAttack = initialAttack
+            self.attacks = attacks
+            
+            if attacks.count > 50 {
+                var attacks = attacks
+                
+                while attacks.count > 50 {
+                    attacks = attacks.filter { _ in
+                        Bool.random()
+                    }
+                }
+                
+                self.attacksCondensed = attacks
+                
+                return
+            }
+            
+            self.attacksCondensed = attacks
+        }
+        
+        let attacksCondensed: [AttackResponse]
     }
 
     static func averageOutcome(fromAttacks attacks: [AttackResponse]) -> AttackAverage {
@@ -240,7 +339,8 @@ struct RiskEngine: Engine {
             attackerLost: attackAverage < initialAttack,
             defenderLost: defenceAverage < initialDefence,
             initialDefence: initialAttack,
-            initialAttack: initialDefence
+            initialAttack: initialDefence,
+            attacks: attacks
         )
         
         return response

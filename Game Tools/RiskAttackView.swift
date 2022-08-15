@@ -46,6 +46,10 @@ struct RiskAttackView: View {
                         } else if let average {
                             FormattedRiskAverage(average: average)
                                 .transition(.opacity)
+                        } else {
+                            Text("Run a calculation to begin.")
+                                .foregroundColor(.secondary)
+                                .transition(.opacity)
                         }
                     }
                     .animation(.linear(duration: 0.4), value: response)
@@ -67,16 +71,20 @@ struct RiskAttackView: View {
             Button("OK") { }
         })
         .navigationTitle("Risk™")
+        #if !os(macOS)
         .navigationBarTitleDisplayMode(.large)
+        #endif
     }
     
     private var adjustmentSliders: some View {
         VStack {
+            let iconWidth: CGFloat = 30
             let valueWidth: CGFloat = 50
             
             Grid(alignment: .leading, horizontalSpacing: 10) {
                 GridRow {
                     Image(systemName: "fork.knife")
+                        .frame(width: iconWidth)
                     Text("Attack:")
                     Text("\(Int(attack))")
                         .frame(width: valueWidth)
@@ -85,6 +93,7 @@ struct RiskAttackView: View {
                 
                 GridRow {
                     Image(systemName: "shield.fill")
+                        .frame(width: iconWidth)
                     Text("Defence:")
                     Text("\(Int(defence))")
                         .frame(width: valueWidth)
@@ -93,6 +102,7 @@ struct RiskAttackView: View {
                 
                 GridRow {
                     Image(systemName: "bolt.fill")
+                        .frame(width: iconWidth)
                     Text("Power:")
                     Text("\(Int(power))")
                         .frame(width: valueWidth)
@@ -101,6 +111,7 @@ struct RiskAttackView: View {
                 
                 GridRow {
                     Image(systemName: "rectangle.3.group.fill")
+                        .frame(width: iconWidth)
                     Text("Simulation Sample Size:")
                     Text("\(Int(sampleSize))")
                         .frame(width: valueWidth)
@@ -150,7 +161,7 @@ struct RiskAttackView: View {
                 .padding(10)
                 .background(Color.blue.cornerRadius(12).shadow(radius: 3))
                 .frame(width: 150)
-                .shadow(radius: 5)
+                .shadow(color: .black.opacity(0.2), radius: 2)
                 .opacity(configuration.isPressed ? 0.5 : 1)
         }
     }
@@ -253,7 +264,8 @@ struct RiskAttackView: View {
                 
                 let seriesConfig = RiskEngine.AttackSeriesConfiguration(
                     maximumIterations: Int(series),
-                    simConfig: config
+                    simConfig: config,
+                    minimumAttackReserve: Int(minimumAttackReserve)
                 )
                 
                 let average: RiskEngine.AttackAverage

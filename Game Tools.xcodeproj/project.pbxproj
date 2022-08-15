@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2418E0A628AA97DC0095DB91 /* RiskPieceDetectorV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2418E0A528AA97DC0095DB91 /* RiskPieceDetectorV2.mlmodel */; };
+		2418E0A828AA98520095DB91 /* RiskPieceDetectorV3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2418E0A728AA98520095DB91 /* RiskPieceDetectorV3.mlmodel */; };
 		2437C6F628A33073004FEBFF /* RiskSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2437C6F528A33073004FEBFF /* RiskSimulator.swift */; };
 		2459FB0C28A33AF500DB01CA /* UIImage+findAverageColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2459FB0B28A33AF500DB01CA /* UIImage+findAverageColor.swift */; };
 		2459FB0E28A346C900DB01CA /* RiskAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2459FB0D28A346C900DB01CA /* RiskAI.swift */; };
 		2459FB1028A34AC100DB01CA /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2459FB0F28A34AC100DB01CA /* ImagePicker.swift */; };
-		2470082328A319B400E842A0 /* RiskCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470082228A319B400E842A0 /* RiskCounter.swift */; };
+		2470082328A319B400E842A0 /* RiskCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470082228A319B400E842A0 /* RiskCounter.swift */; platformFilter = ios; };
 		2477142D28A0969000B8AE5C /* Game_ToolsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477142C28A0969000B8AE5C /* Game_ToolsApp.swift */; };
 		2477142F28A0969000B8AE5C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477142E28A0969000B8AE5C /* ContentView.swift */; };
 		2477143128A0969100B8AE5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2477143028A0969100B8AE5C /* Assets.xcassets */; };
-		2477143528A0969100B8AE5C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2477143428A0969100B8AE5C /* Preview Assets.xcassets */; };
 		2477143F28A0969100B8AE5C /* Game_ToolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477143E28A0969100B8AE5C /* Game_ToolsTests.swift */; };
 		2477144928A0969100B8AE5C /* Game_ToolsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477144828A0969100B8AE5C /* Game_ToolsUITests.swift */; };
 		2477144B28A0969100B8AE5C /* Game_ToolsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477144A28A0969100B8AE5C /* Game_ToolsUITestsLaunchTests.swift */; };
@@ -24,6 +25,8 @@
 		2477145C28A0D62500B8AE5C /* RiskEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477145B28A0D62500B8AE5C /* RiskEngine.swift */; };
 		2477145E28A0DAA500B8AE5C /* RiskRollsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477145D28A0DAA500B8AE5C /* RiskRollsView.swift */; };
 		2477146028A0DD0800B8AE5C /* FormattedRiskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2477145F28A0DD0800B8AE5C /* FormattedRiskResponse.swift */; };
+		24B04D0C28A961C200BAB9DF /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B04D0B28A961C200BAB9DF /* CameraManager.swift */; platformFilter = ios; };
+		24B04D1028A98F3A00BAB9DF /* CameraObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B04D0F28A98F3A00BAB9DF /* CameraObserver.swift */; platformFilter = ios; };
 		24BEEB0728A20B2A003C409C /* FormattedRiskAverage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEEB0628A20B2A003C409C /* FormattedRiskAverage.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2418E0A528AA97DC0095DB91 /* RiskPieceDetectorV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = RiskPieceDetectorV2.mlmodel; sourceTree = "<group>"; };
+		2418E0A728AA98520095DB91 /* RiskPieceDetectorV3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = RiskPieceDetectorV3.mlmodel; sourceTree = "<group>"; };
 		2437C6F528A33073004FEBFF /* RiskSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskSimulator.swift; sourceTree = "<group>"; };
 		2459FB0B28A33AF500DB01CA /* UIImage+findAverageColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+findAverageColor.swift"; sourceTree = "<group>"; };
 		2459FB0D28A346C900DB01CA /* RiskAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskAI.swift; sourceTree = "<group>"; };
@@ -66,6 +71,8 @@
 		2477145B28A0D62500B8AE5C /* RiskEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskEngine.swift; sourceTree = "<group>"; };
 		2477145D28A0DAA500B8AE5C /* RiskRollsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskRollsView.swift; sourceTree = "<group>"; };
 		2477145F28A0DD0800B8AE5C /* FormattedRiskResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedRiskResponse.swift; sourceTree = "<group>"; };
+		24B04D0B28A961C200BAB9DF /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		24B04D0F28A98F3A00BAB9DF /* CameraObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraObserver.swift; sourceTree = "<group>"; };
 		24BEEB0628A20B2A003C409C /* FormattedRiskAverage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedRiskAverage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,10 +133,14 @@
 				24BEEB0628A20B2A003C409C /* FormattedRiskAverage.swift */,
 				2477145F28A0DD0800B8AE5C /* FormattedRiskResponse.swift */,
 				2470082228A319B400E842A0 /* RiskCounter.swift */,
+				24B04D0B28A961C200BAB9DF /* CameraManager.swift */,
+				24B04D0F28A98F3A00BAB9DF /* CameraObserver.swift */,
 				2459FB0F28A34AC100DB01CA /* ImagePicker.swift */,
 				2437C6F528A33073004FEBFF /* RiskSimulator.swift */,
 				2459FB0D28A346C900DB01CA /* RiskAI.swift */,
 				2459FB0B28A33AF500DB01CA /* UIImage+findAverageColor.swift */,
+				2418E0A528AA97DC0095DB91 /* RiskPieceDetectorV2.mlmodel */,
+				2418E0A728AA98520095DB91 /* RiskPieceDetectorV3.mlmodel */,
 				2477143028A0969100B8AE5C /* Assets.xcassets */,
 				2477143228A0969100B8AE5C /* Game_Tools.entitlements */,
 				2477143328A0969100B8AE5C /* Preview Content */,
@@ -270,7 +281,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2477143528A0969100B8AE5C /* Preview Assets.xcassets in Resources */,
 				2477143128A0969100B8AE5C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,13 +311,17 @@
 				2477142F28A0969000B8AE5C /* ContentView.swift in Sources */,
 				2477145828A096BD00B8AE5C /* Engine.swift in Sources */,
 				2477145E28A0DAA500B8AE5C /* RiskRollsView.swift in Sources */,
+				2418E0A828AA98520095DB91 /* RiskPieceDetectorV3.mlmodel in Sources */,
 				2470082328A319B400E842A0 /* RiskCounter.swift in Sources */,
 				2477142D28A0969000B8AE5C /* Game_ToolsApp.swift in Sources */,
 				2477145C28A0D62500B8AE5C /* RiskEngine.swift in Sources */,
+				24B04D0C28A961C200BAB9DF /* CameraManager.swift in Sources */,
 				2437C6F628A33073004FEBFF /* RiskSimulator.swift in Sources */,
 				2477146028A0DD0800B8AE5C /* FormattedRiskResponse.swift in Sources */,
+				24B04D1028A98F3A00BAB9DF /* CameraObserver.swift in Sources */,
 				24BEEB0728A20B2A003C409C /* FormattedRiskAverage.swift in Sources */,
 				2459FB0E28A346C900DB01CA /* RiskAI.swift in Sources */,
+				2418E0A628AA97DC0095DB91 /* RiskPieceDetectorV2.mlmodel in Sources */,
 				2459FB0C28A33AF500DB01CA /* UIImage+findAverageColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,8 +492,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -519,8 +533,8 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";

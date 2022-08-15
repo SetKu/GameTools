@@ -10,7 +10,9 @@ import SwiftUI
 struct ContentView: View {
     enum Sections: String, Identifiable, CaseIterable {
         case riskAttack = "Risk Attack Automation"
+        #if !os(macOS)
         case riskCounter = "Risk Piece Counter"
+        #endif
         case riskAI = "Risk Artificial Intelligence"
         
         var id: Int { self.hashValue }
@@ -18,8 +20,10 @@ struct ContentView: View {
             switch self {
             case .riskAttack:
                 return "die.face.5.fill"
+            #if !os(macOS)
             case .riskCounter:
                 return "camera.viewfinder"
+            #endif
             case .riskAI:
                 return "globe.americas.fill"
             }
@@ -42,8 +46,10 @@ struct ContentView: View {
             switch selectedSection {
             case .riskAttack:
                 RiskAttackView()
+            #if !os(macOS)
             case .riskCounter:
                 RiskCounter()
+            #endif
             case .riskAI:
                 RiskAI()
             }

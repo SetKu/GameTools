@@ -5,6 +5,7 @@
 //  Created by Zachary Morden on 2022-08-09.
 //
 
+#if !os(macOS)
 import SwiftUI
 import PhotosUI
 
@@ -91,3 +92,4 @@ struct ImagePicker_Previews: PreviewProvider {
         ImagePicker(image: .constant(nil), useCamera: false)
     }
 }
+#endif

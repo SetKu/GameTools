@@ -5,6 +5,7 @@
 //  Created by Zachary Morden on 2022-08-09.
 //
 
+#if !os(macOS)
 import Foundation
 import UIKit
 
@@ -127,3 +128,4 @@ extension UIImage {
         return UInt8((pixelData >> 0) & 255)
     }
 }
+#endif
