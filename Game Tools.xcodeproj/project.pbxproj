@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2418E0A628AA97DC0095DB91 /* RiskPieceDetectorV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2418E0A528AA97DC0095DB91 /* RiskPieceDetectorV2.mlmodel */; };
 		2418E0A828AA98520095DB91 /* RiskPieceDetectorV3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2418E0A728AA98520095DB91 /* RiskPieceDetectorV3.mlmodel */; };
+		2418E0AA28AB27F40095DB91 /* RiskPieceDetectorV1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2418E0A928AB27F40095DB91 /* RiskPieceDetectorV1.mlmodel */; };
 		2437C6F628A33073004FEBFF /* RiskSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2437C6F528A33073004FEBFF /* RiskSimulator.swift */; };
 		2459FB0C28A33AF500DB01CA /* UIImage+findAverageColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2459FB0B28A33AF500DB01CA /* UIImage+findAverageColor.swift */; };
 		2459FB0E28A346C900DB01CA /* RiskAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2459FB0D28A346C900DB01CA /* RiskAI.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		2418E0A528AA97DC0095DB91 /* RiskPieceDetectorV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = RiskPieceDetectorV2.mlmodel; sourceTree = "<group>"; };
 		2418E0A728AA98520095DB91 /* RiskPieceDetectorV3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = RiskPieceDetectorV3.mlmodel; sourceTree = "<group>"; };
+		2418E0A928AB27F40095DB91 /* RiskPieceDetectorV1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = RiskPieceDetectorV1.mlmodel; sourceTree = "<group>"; };
 		2437C6F528A33073004FEBFF /* RiskSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskSimulator.swift; sourceTree = "<group>"; };
 		2459FB0B28A33AF500DB01CA /* UIImage+findAverageColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+findAverageColor.swift"; sourceTree = "<group>"; };
 		2459FB0D28A346C900DB01CA /* RiskAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskAI.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				2437C6F528A33073004FEBFF /* RiskSimulator.swift */,
 				2459FB0D28A346C900DB01CA /* RiskAI.swift */,
 				2459FB0B28A33AF500DB01CA /* UIImage+findAverageColor.swift */,
+				2418E0A928AB27F40095DB91 /* RiskPieceDetectorV1.mlmodel */,
 				2418E0A528AA97DC0095DB91 /* RiskPieceDetectorV2.mlmodel */,
 				2418E0A728AA98520095DB91 /* RiskPieceDetectorV3.mlmodel */,
 				2477143028A0969100B8AE5C /* Assets.xcassets */,
@@ -306,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2418E0AA28AB27F40095DB91 /* RiskPieceDetectorV1.mlmodel in Sources */,
 				2459FB1028A34AC100DB01CA /* ImagePicker.swift in Sources */,
 				2477145A28A0A6B300B8AE5C /* RiskAttackView.swift in Sources */,
 				2477142F28A0969000B8AE5C /* ContentView.swift in Sources */,

@@ -20,18 +20,18 @@ struct RiskEngine: Engine {
     
     final class Counter: ObservableObject {
         enum Model: String, CaseIterable {
+            case v1 = "V1"
             case v2 = "V2"
             case v3 = "V3"
             
-            static let modelV2 = (try! RiskPieceDetectorV2(configuration: .init())).model
-            static let modelV3 = (try! RiskPieceDetectorV3(configuration: .init())).model
-            
             var mlModel: MLModel {
                 switch self {
+                case .v1:
+                    return (try! RiskPieceDetectorV1(configuration: .init())).model
                 case .v2:
-                    return Self.modelV2
+                    return (try! RiskPieceDetectorV2(configuration: .init())).model
                 case .v3:
-                    return Self.modelV3
+                    return (try! RiskPieceDetectorV3(configuration: .init())).model
                 }
             }
         }
@@ -39,7 +39,7 @@ struct RiskEngine: Engine {
         @Published var currentModel: Model
         private var visionModel: VNCoreMLModel { try! VNCoreMLModel(for: currentModel.mlModel) }
         
-        init() { self.currentModel = .v2 }
+        init() { self.currentModel = .v1 }
         
         func detectObjects(image: CGImage) throws -> [VNRecognizedObjectObservation] {
             var returnVal = [VNRecognizedObjectObservation]()

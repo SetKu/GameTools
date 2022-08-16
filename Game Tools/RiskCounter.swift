@@ -31,7 +31,7 @@ struct RiskCounter: View {
     
     @State private var imageReceived = false
     @State private var liveImageUpdates = 0
-    @State private var liveUpdatesToSkip = 10
+    @State private var liveUpdatesToSkip = 15
     
     // MARK: Data and Image Collection
     
@@ -184,8 +184,6 @@ struct RiskCounter: View {
                         }
                         
                         context.draw(Image(image, scale: 1.0, label: Text("")), in: rect)
-                        
-                        print(size, rect.size)
                         
                         for observation in observations {
                             var denormalized = denormalizedRect(for: observation, in: rect.size)
