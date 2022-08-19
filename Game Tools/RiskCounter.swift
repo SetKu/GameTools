@@ -267,15 +267,26 @@ struct RiskCounter: View {
         self.image = nil
     }
     
-    private func count() {
+    @State private var runningTask: Task<Void, Never>? = nil
+    
+    @MainActor private func count() {
         observations = []
         guard let image else { return }
         
-        do {
-            self.observations = try counter.detectObjects(image: image)
-        } catch {
-            self.error = error.localizedDescription
-            self.showingError = true
+        runningTask?.cancel()
+        runningTask = Task(priority: .userInitiated) {
+            do {
+                let observations = try counter.detectObjects(image: image)
+                
+                DispatchQueue.main.async {
+                    self.observations = observations
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.error = error.localizedDescription
+                    self.showingError = true
+                }
+            }
         }
     }
 }
