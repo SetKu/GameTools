@@ -13,7 +13,7 @@ struct ContentView: View {
         #if !os(macOS)
         case riskCounter = "Risk Piece Counter"
         #endif
-        case riskAI = "Risk Artificial Intelligence"
+//        case riskAI = "Risk Artificial Intelligence"
         
         var id: Int { self.hashValue }
         var image: String {
@@ -24,8 +24,8 @@ struct ContentView: View {
             case .riskCounter:
                 return "camera.viewfinder"
             #endif
-            case .riskAI:
-                return "globe.americas.fill"
+//            case .riskAI:
+//                return "globe.americas.fill"
             }
         }
     }
@@ -50,8 +50,8 @@ struct ContentView: View {
             case .riskCounter:
                 RiskCounter()
             #endif
-            case .riskAI:
-                RiskAI()
+//            case .riskAI:
+//                RiskAI()
             }
         })
         .frame(minWidth: 200, minHeight: 100)
@@ -71,8 +71,8 @@ struct ContentView: View {
                     RiskAttackView()
                 case .riskCounter:
                     RiskCounter()
-                case .riskAI:
-                    RiskAI()
+//                case .riskAI:
+//                    RiskAI()
                 }
             })
             .navigationTitle("Game Tools")

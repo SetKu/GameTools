@@ -108,6 +108,181 @@ struct RiskEngine: Engine {
 //        }
     }
     
+    // MARK: - AI
+    
+    // I Have decided to postpone further work on this AI indefinitely, as the variation in rules between Risk game sets varies wildly. For instance, the official rules heavily conflict with the rules in my official physical Risk game.
+    // This AI isn't even really functional yet, but could possibly become so with a lot of work to make it fully customizable and programmable. Then, the tool would be able to adapt to multiple rule variations.
+    // The fact of these variations makes developing a Risk AI more difficult than a game like chess, which has a single set of rules or distinct variations on the game (such as Bullet chess) which don't vary too wildly.
+    // Official Risk Rules Reference: https://www.ultraboardgames.com/risk/game-rules.php
+    
+    final class AI: ObservableObject {
+        struct DataRepresentation: Codable {
+            let owners: [Owner]
+            let territories: [Territory]
+        }
+        
+        final class Owner: Identifiable, Codable {
+            var id = UUID()
+            var name: String
+            var armiesInStore: Int
+            var cards: [Cards]
+        }
+        
+        enum Cards: Codable, CaseIterable {
+            case footSolider, cannon, cavalry, wild
+        }
+        
+        final class Territory: Identifiable, Codable {
+            var id = UUID()
+            var name: String
+            var armies: Int
+            var neighbouringTerritoryIDs: [UUID]
+            var ownerID: UUID
+        }
+        
+        private var cardsCashInIncrements = [5, 10, 15 /*etc.*/]
+        
+        @Published private(set) var owners = [Owner]()
+        @Published private(set) var territories = [Territory]()
+        @Published private(set) var cardsCashInCount = 0
+        
+        init() { load() }
+        
+        enum Errors: Error {
+            case ownerHasTerritory(Territory)
+            case notFound
+            case ownerHasNoTerritories
+        }
+        
+        // MARK: Analysis
+        
+        enum Moves {
+            case attack(Attack)
+            case doNothing
+        }
+        
+        struct Attack {
+            let from: Territory
+            let to: Territory
+        }
+        
+        func newArmiesNow(for owner: Owner) -> Int {
+            let deployed = territories(for: owner).map(\.armies).reduce(0, { $0 + $1 })
+            return Int(floor(Double(deployed) / 3.0))
+        }
+        
+        func findMoves(for owner: Owner) throws -> [Moves] {
+            let ownerTerritories = territories(for: owner)
+            var moves = [Moves.doNothing]
+            
+            if ownerTerritories.isEmpty {
+                throw Errors.ownerHasNoTerritories
+            }
+            
+            for territory in ownerTerritories {
+                let neighbours = neighbours(for: territory)
+                
+                for neighbour in neighbours {
+                    let attack = Attack(from: territory, to: neighbour)
+                    moves.append(.attack(attack))
+                }
+            }
+            
+            return moves
+        }
+        
+        // MARK: CRUD
+        
+        /// - Returns: The card it just gave to the owner.
+        @discardableResult
+        func giveRandomCard(to owner: Owner) -> Cards {
+            let card = Cards.allCases.randomElement()!
+            owner.cards.append(card)
+            return card
+        }
+        
+        func territories(for owner: Owner) -> [Territory] {
+            territories.filter({ $0.ownerID == owner.id })
+        }
+        
+        func neighbours(for territory: Territory) -> [Territory] {
+            territories.filter({ terr in
+                territory.neighbouringTerritoryIDs.contains { $0 == terr.id }
+            })
+        }
+        
+        func add(owner: Owner) {
+            self.owners.append(owner)
+        }
+        
+        func delete(owner: Owner) throws {
+            for territory in territories {
+                if territory.ownerID == owner.id {
+                    throw Errors.ownerHasTerritory(territory)
+                }
+            }
+            
+            if let index = owners.firstIndex(where: { $0.id == owner.id }) {
+                owners.remove(at: index)
+                return
+            }
+            
+            throw Errors.notFound
+        }
+        
+        func add(territory: Territory) {
+            self.territories.append(territory)
+        }
+        
+        func delete(territory: Territory) throws {
+            if let index = territories.firstIndex(where: { $0.id == territory.id }) {
+                territories.remove(at: index)
+                
+                for potentialRef in territories {
+                    // Remove the territory as a reference from other territories.
+                    potentialRef.neighbouringTerritoryIDs = potentialRef.neighbouringTerritoryIDs.compactMap {
+                        if $0 == territory.id {
+                            return nil
+                        }
+                        
+                        return $0
+                    }
+                }
+                
+                return
+            }
+            
+            throw Errors.notFound
+        }
+        
+        func resetToDefaults() {
+            
+        }
+        
+        // MARK: Persistence
+        
+        private var onDiskLocation: URL {
+            FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appending(path: "RiskAI_Data.json")
+        }
+        
+        private func load() {
+            if let data = try? Data(contentsOf: onDiskLocation) {
+                if let decoded = try? JSONDecoder().decode(DataRepresentation.self, from: data) {
+                    self.owners = decoded.owners
+                    self.territories = decoded.territories
+                }
+            }
+        }
+        
+        private func save() {
+            let dataRep = DataRepresentation(owners: owners, territories: territories)
+            
+            if let data = try? JSONEncoder().encode(dataRep) {
+                try? data.write(to: onDiskLocation, options: .atomic)
+            }
+        }
+    }
+    
     // MARK: - Attack Simulators
     
     struct Roll: Identifiable, Equatable {
