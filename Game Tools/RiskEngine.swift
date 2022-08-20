@@ -41,7 +41,7 @@ struct RiskEngine: Engine {
         
         init() { self.currentModel = .v1 }
         
-        func detectObjects(image: CGImage) throws -> [VNRecognizedObjectObservation] {
+        func detectObjects(image: CGImage) async throws -> [VNRecognizedObjectObservation] {
             var returnVal = [VNRecognizedObjectObservation]()
             
             let request = VNCoreMLRequest(model: visionModel) { request, error in
@@ -59,7 +59,7 @@ struct RiskEngine: Engine {
             #else
             let orientation: CGImagePropertyOrientation
             
-            switch UIDevice.current.orientation {
+            switch await UIDevice.current.orientation {
             case .portraitUpsideDown:
                 orientation = .down
                 break

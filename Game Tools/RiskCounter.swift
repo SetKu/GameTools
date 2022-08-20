@@ -97,31 +97,28 @@ struct RiskCounter: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                Group {
-                    sourcePicker
-                    modelPicker
-                    
-                    Text("Recognized Objects: \(observations.count)")
-                    Text("Total Value: \(totalValue)")
-                }
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 20)
+        VStack(spacing: 15) {
+            VStack(spacing: 10) {
+                sourcePicker
+                modelPicker
                 
-                imageView
-                
-                Spacer()
+                Text("Recognized Objects: \(observations.count)")
+                Text("Total Value: \(totalValue)")
             }
-            .navigationTitle("Risk Pieces Counter")
-            .alert("Error", isPresented: $showingError, actions: {
-                Button("OK") { }
-            })
-            .sheet(isPresented: $picking, content: {
-                ImagePicker(image: $tempPickerImage, useCamera: source == .camera)
-                    .ignoresSafeArea()
-            })
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 20)
+            
+            imageView
+                .ignoresSafeArea()
         }
+        .navigationTitle("Risk Pieces Counter")
+        .alert("Error", isPresented: $showingError, actions: {
+            Button("OK") { }
+        })
+        .sheet(isPresented: $picking, content: {
+            ImagePicker(image: $tempPickerImage, useCamera: source == .camera)
+                .ignoresSafeArea()
+        })
         .onDisappear {
             cameraObserver.active = false
         }
@@ -147,7 +144,7 @@ struct RiskCounter: View {
                     .foregroundColor(.primary.opacity(0.2))
                 
                 VStack {
-                    Image(systemName: "photo.fill")
+                    Image(systemName: source == .camera ? "camera.fill" : "photo.fill")
                         .resizable()
                         .scaledToFit()
                         .foregroundColor(.secondary)
@@ -210,7 +207,7 @@ struct RiskCounter: View {
                     }
                 }
             }
-            .frame(height: 400)
+            .frame(maxHeight: .infinity)
             .clipped()
         }
         .disabled(source == .live)
@@ -270,13 +267,12 @@ struct RiskCounter: View {
     @State private var runningTask: Task<Void, Never>? = nil
     
     @MainActor private func count() {
-        observations = []
         guard let image else { return }
         
         runningTask?.cancel()
         runningTask = Task(priority: .userInitiated) {
             do {
-                let observations = try counter.detectObjects(image: image)
+                let observations = try await counter.detectObjects(image: image)
                 
                 DispatchQueue.main.async {
                     self.observations = observations
